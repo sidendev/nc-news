@@ -20,4 +20,7 @@ describe('/api/topics', () => {
         });
       });
   });
+  test('GET:404 responds with a 404 status when given an invalid api route path', () => {
+    return request(app).get('/api/topiks').expect(404);
+  });
 });
