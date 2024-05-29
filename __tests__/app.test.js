@@ -48,3 +48,37 @@ describe('GET/api', () => {
       });
   });
 });
+
+describe('/api/articles/:article_id', () => {
+  test('GET:200 sends an article to client with expected data by id', () => {
+    return request(app)
+      .get('/api/articles/1')
+      .expect(200)
+      .then((res) => {
+        expect(res.body.article.article_id).toBe(1);
+        expect(res.body.article.title).toBe(
+          'Living in the shadow of a great man'
+        );
+        expect(res.body.article.topic).toBe('mitch');
+        expect(res.body.article.author).toBe('butter_bridge');
+        expect(res.body.article.body).toBe('I find this existence challenging');
+        expect(res.body.article.votes).toBe(100);
+      });
+  });
+  test('GET:404 sends an appropriate status and error message when given a valid but non-existent id', () => {
+    return request(app)
+      .get('/api/articles/99999')
+      .expect(404)
+      .then((res) => {
+        expect(res.body.msg).toBe('Article does not exist');
+      });
+  });
+  test('GET:400 sends an appropriate status and error message when given an invalid id', () => {
+    return request(app)
+      .get('/api/articles/not-an-id')
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe('Bad request');
+      });
+  });
+});
