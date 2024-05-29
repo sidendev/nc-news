@@ -2,6 +2,7 @@ const {
   selectTopics,
   selectApiDetails,
   selectArticleById,
+  selectArticles,
 } = require('../models/app.models');
 
 exports.getTopics = (req, res, next) => {
@@ -29,4 +30,12 @@ exports.getArticleById = (req, res, next) => {
     .catch((err) => {
       next(err);
     });
+};
+
+exports.getArticles = (req, res, next) => {
+  selectArticles()
+    .then((articles) => {
+      res.status(200).send({ articles });
+    })
+    .catch(next);
 };

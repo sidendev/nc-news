@@ -82,3 +82,31 @@ describe('/api/articles/:article_id', () => {
       });
   });
 });
+
+describe('/api/articles', () => {
+  test('GET:200 and sends array of all articles with comment_count added and body removed', () => {
+    return request(app)
+      .get('/api/articles')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(13);
+        body.articles.forEach((article) => {
+          expect(typeof article.title).toBe('string');
+          expect(typeof article.topic).toBe('string');
+          expect(typeof article.author).toBe('string');
+          expect(typeof article.created_at).toBe('string');
+          expect(typeof article.article_img_url).toBe('string');
+          expect(typeof article.comment_count).toBe('number');
+        });
+      });
+  });
+  test('GET:200 checks returned array is in descending order by created_at', () => {
+    return request(app)
+      .get('/api/articles')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(13);
+        expect(body.articles).toBeSorted('created_at');
+      });
+  });
+});

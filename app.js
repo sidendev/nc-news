@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-app.use(express.json());
 const {
   getTopics,
   getApiDetails,
   getArticleById,
+  getArticles,
 } = require('./controllers/app.controllers');
 
 app.get('/api/topics', getTopics);
@@ -12,6 +12,8 @@ app.get('/api/topics', getTopics);
 app.get('/api', getApiDetails);
 
 app.get('/api/articles/:article_id', getArticleById);
+
+app.get('/api/articles', getArticles);
 
 app.use((err, req, res, next) => {
   if (err.code) {
