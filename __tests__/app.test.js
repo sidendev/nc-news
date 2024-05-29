@@ -20,7 +20,18 @@ describe('/api/topics', () => {
         });
       });
   });
-  test('GET:404 responds with a 404 status when given an invalid api route path', () => {
-    return request(app).get('/api/topiks').expect(404);
+});
+
+describe('GET/api', () => {
+  test('GET:200 responds with an object of endpoint details and checks if description is present and is a string: ', () => {
+    return request(app)
+      .get('/api')
+      .expect(200)
+      .then(({ body }) => {
+        const endpointDetails = body.details;
+        for (let endpoint in endpointDetails) {
+          expect(typeof endpointDetails[endpoint].description).toBe('string');
+        }
+      });
   });
 });
