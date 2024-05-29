@@ -15,7 +15,7 @@ exports.selectTopics = () => {
 };
 
 exports.selectApiDetails = () => {
-  return fs.readFile(`endpoints.json`, 'utf-8').then((details) => {
+  return fs.readFile('endpoints.json', 'utf-8').then((details) => {
     return JSON.parse(details);
   });
 };
