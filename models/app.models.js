@@ -60,18 +60,51 @@ exports.selectCommentsByArticleId = (article_id) => {
       [article_id]
     )
     .then(({ rows }) => {
-      if (rows.length === 0) {
-        return Promise.reject({ status: 404, msg: 'No comments found' });
-      }
       return rows;
     });
 };
 
+exports.checkArticleExists = (article_id) => {
+  return db
+    .query(`SELECT * FROM articles WHERE article_id = $1`, [article_id])
+    .then(({ rows }) => {
+      if (rows.length === 0) {
+        return Promise.reject({ status: 404, msg: 'No article found' });
+      }
+    });
+};
+
 exports.insertCommentByArticleId = (article_id, author, body) => {
+  if (typeof author !== 'string' || typeof body !== 'string')
+    return Promise.reject({
+      status: 400,
+      msg: 'Bad request - invalid input for comment',
+    });
+  if (author.length === 0 || body.length === 0)
+    return Promise.reject({
+      status: 400,
+      msg: 'Bad request - missing input for comment',
+    });
   return db
     .query(
       'INSERT INTO comments (article_id, author, body) VALUES ($1, $2, $3) RETURNING *;',
       [article_id, author, body]
+    )
+    .then((result) => {
+      return result.rows[0];
+    });
+};
+
+exports.updateArticleVotesById = (article_id, inc_votes) => {
+  if (typeof inc_votes !== 'number')
+    return Promise.reject({
+      status: 400,
+      msg: 'Bad request, invalid input for updating votes',
+    });
+  return db
+    .query(
+      'UPDATE articles SET votes = votes + $1 WHERE article_id = $2 RETURNING *;',
+      [inc_votes, article_id]
     )
     .then((result) => {
       return result.rows[0];
