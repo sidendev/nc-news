@@ -82,5 +82,9 @@
         "article_img_url": "https://images.example.com/example"
       }
     }
+  },
+  "DELETE /api/comments/:comment_id": {
+    "description": "Deletes a comment by the comment id passed in, responds with 204 status and no content to client",
+    "exampleResponse": {}
   }
 }

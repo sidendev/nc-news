@@ -308,3 +308,25 @@ describe('PATCH/api/articles/:article_id', () => {
       });
   });
 });
+
+describe('DELETE/api/comments/:comment_id', () => {
+  test('DELETE:204 deletes the specified comment by comment id and sends no body back', () => {
+    return request(app).delete('/api/comments/1').expect(204);
+  });
+  test('DELETE:404 responds with status and error message when given a non-existent id', () => {
+    return request(app)
+      .delete('/api/comments/99999')
+      .expect(404)
+      .then((response) => {
+        expect(response.body.msg).toBe('Comment not found');
+      });
+  });
+  test('DELETE:400 responds with status and error message when given an invalid id', () => {
+    return request(app)
+      .delete('/api/comments/not-an-id')
+      .expect(400)
+      .then((response) => {
+        expect(response.body.msg).toBe('Bad request');
+      });
+  });
+});
