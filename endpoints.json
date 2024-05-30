@@ -86,5 +86,18 @@
   "DELETE /api/comments/:comment_id": {
     "description": "Deletes a comment by the comment id passed in, responds with 204 status and no content to client",
     "exampleResponse": {}
+  },
+  "GET /api/users": {
+    "description": "serves an array of all users",
+    "queries": [],
+    "exampleResponse": {
+      "users": [
+        {
+          "username": "joe",
+          "name": "joe smith",
+          "avatar_url": "https://images.example.com/example"
+        }
+      ]
+    }
   }
 }

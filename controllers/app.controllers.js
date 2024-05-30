@@ -8,6 +8,7 @@ const {
   updateArticleVotesById,
   checkArticleExists,
   removeCommentById,
+  selectUsers,
 } = require('../models/app.models');
 
 exports.getTopics = (req, res, next) => {
@@ -32,9 +33,7 @@ exports.getArticleById = (req, res, next) => {
     .then((article) => {
       res.status(200).send({ article });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 exports.getArticles = (req, res, next) => {
@@ -56,9 +55,7 @@ exports.getCommentsByArticleId = (req, res, next) => {
       const comments = promisesResolved[0];
       res.status(200).send({ comments });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 exports.postCommentByArticleId = (req, res, next) => {
@@ -68,9 +65,7 @@ exports.postCommentByArticleId = (req, res, next) => {
     .then((comment) => {
       res.status(201).send({ comment });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 exports.patchArticleVotesById = (req, res, next) => {
@@ -80,9 +75,7 @@ exports.patchArticleVotesById = (req, res, next) => {
     .then((article) => {
       res.status(200).send({ article });
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
 };
 
 exports.deleteCommentById = (req, res, next) => {
@@ -91,7 +84,13 @@ exports.deleteCommentById = (req, res, next) => {
     .then(() => {
       res.status(204).send();
     })
-    .catch((err) => {
-      next(err);
-    });
+    .catch(next);
+};
+
+exports.getUsers = (req, res, next) => {
+  selectUsers()
+    .then((users) => {
+      res.status(200).send({ users });
+    })
+    .catch(next);
 };
