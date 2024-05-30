@@ -106,7 +106,7 @@ describe('GET/api/articles', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.articles).toHaveLength(13);
-        expect(body.articles).toBeSorted('created_at');
+        expect(body.articles).toBeSorted('created_at', { descending: true });
       });
   });
 });
@@ -134,7 +134,7 @@ describe('GET/api/articles/:article_id/comments', () => {
       .expect(200)
       .then(({ body }) => {
         expect(body.comments).toHaveLength(11);
-        expect(body.comments).toBeSorted('created_at');
+        expect(body.comments).toBeSorted('created_at', { descending: true });
       });
   });
   test('GET:404 sends an appropriate status and error message when given a valid but non-existent article id', () => {
