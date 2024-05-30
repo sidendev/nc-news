@@ -5,6 +5,7 @@ const {
   getApiDetails,
   getArticleById,
   getArticles,
+  getCommentsByArticleId,
 } = require('./controllers/app.controllers');
 
 app.get('/api/topics', getTopics);
@@ -14,6 +15,8 @@ app.get('/api', getApiDetails);
 app.get('/api/articles/:article_id', getArticleById);
 
 app.get('/api/articles', getArticles);
+
+app.get('/api/articles/:article_id/comments', getCommentsByArticleId);
 
 app.use((err, req, res, next) => {
   if (err.code) {
