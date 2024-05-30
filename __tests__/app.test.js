@@ -123,7 +123,7 @@ describe('GET/api/articles/:article_id/comments', () => {
           expect(typeof comment.body).toBe('string');
           expect(typeof comment.votes).toBe('number');
           expect(typeof comment.author).toBe('string');
-          expect(typeof comment.article_id).toBe('number');
+          expect(comment.article_id).toBe(9);
           expect(typeof comment.created_at).toBe('string');
         });
       });
