@@ -126,3 +126,9 @@ exports.removeCommentById = (comment_id) => {
       return result;
     });
 };
+
+exports.selectUsers = () => {
+  return db.query(`SELECT * FROM users;`).then(({ rows }) => {
+    return rows;
+  });
+};
