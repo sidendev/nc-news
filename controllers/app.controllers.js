@@ -7,6 +7,7 @@ const {
   insertCommentByArticleId,
   updateArticleVotesById,
   checkArticleExists,
+  removeCommentById,
 } = require('../models/app.models');
 
 exports.getTopics = (req, res, next) => {
@@ -78,6 +79,17 @@ exports.patchArticleVotesById = (req, res, next) => {
   updateArticleVotesById(article_id, inc_votes)
     .then((article) => {
       res.status(200).send({ article });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.deleteCommentById = (req, res, next) => {
+  const { comment_id } = req.params;
+  removeCommentById(comment_id)
+    .then(() => {
+      res.status(204).send();
     })
     .catch((err) => {
       next(err);
