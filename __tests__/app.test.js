@@ -8,7 +8,7 @@ const fs = require('fs');
 beforeEach(() => seed(data));
 afterAll(() => db.end());
 
-describe('/api/topics', () => {
+describe('GET/api/topics', () => {
   test('GET:200 and sends array of all topics with properties of slug and description', () => {
     return request(app)
       .get('/api/topics')
@@ -49,7 +49,7 @@ describe('GET/api', () => {
   });
 });
 
-describe('/api/articles/:article_id', () => {
+describe('GET/api/articles/:article_id', () => {
   test('GET:200 sends an article to client with expected data by id', () => {
     return request(app)
       .get('/api/articles/1')
@@ -83,7 +83,7 @@ describe('/api/articles/:article_id', () => {
   });
 });
 
-describe('/api/articles', () => {
+describe('GET/api/articles', () => {
   test('GET:200 and sends array of all articles with comment_count added and body removed', () => {
     return request(app)
       .get('/api/articles')
@@ -111,7 +111,7 @@ describe('/api/articles', () => {
   });
 });
 
-describe('/api/articles/:article_id/comments', () => {
+describe('GET/api/articles/:article_id/comments', () => {
   test('GET:200 sends an array of comments for the given article_id to the client', () => {
     return request(app)
       .get('/api/articles/9/comments')
@@ -148,6 +148,40 @@ describe('/api/articles/:article_id/comments', () => {
   test('GET:400 responds with an appropriate error message when given an invalid article id', () => {
     return request(app)
       .get('/api/articles/not-an-id/comments')
+      .expect(400)
+      .then((response) => {
+        expect(response.body.msg).toBe('Bad request');
+      });
+  });
+});
+
+describe('POST/api/articles/:article_id/comments', () => {
+  test('POST:201 adds a new comment to an article and sends the comment back to the client', () => {
+    const newComment = {
+      author: 'lurker',
+      body: 'This is my first comment!',
+    };
+    return request(app)
+      .post('/api/articles/9/comments')
+      .send(newComment)
+      .expect(201)
+      .then((response) => {
+        expect(typeof response.body.comment.comment_id).toBe('number');
+        expect(response.body.comment.body).toBe('This is my first comment!');
+        expect(response.body.comment.article_id).toBe(9);
+        expect(response.body.comment.author).toBe('lurker');
+        expect(typeof response.body.comment.votes).toBe('number');
+        expect(typeof response.body.comment.created_at).toBe('string');
+      });
+  });
+  test('POST:400 responds with an appropriate status and error message when provided with a bad request (invalid article id)', () => {
+    const newComment = {
+      author: 'lurker',
+      body: 'This is my first comment!',
+    };
+    return request(app)
+      .post('/api/articles/not-an-id/comments')
+      .send(newComment)
       .expect(400)
       .then((response) => {
         expect(response.body.msg).toBe('Bad request');
