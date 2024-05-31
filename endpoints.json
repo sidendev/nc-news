@@ -28,7 +28,7 @@
     }
   },
   "GET /api/articles/:article_id": {
-    "description": "serves a specific article by the id entered",
+    "description": "serves a specific article by the id entered with also the comment_count for article",
     "exampleResponse": {
       "article": {
         "article_id": 1,
@@ -38,7 +38,8 @@
         "body": "I find this existence challenging",
         "created_at": "2020-07-09T20:11:00.000Z",
         "votes": 100,
-        "article_img_url": "https://images.example.com/example"
+        "article_img_url": "https://images.example.com/example",
+        "comment_count": 10
       }
     }
   },
