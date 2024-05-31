@@ -37,7 +37,8 @@ exports.getArticleById = (req, res, next) => {
 };
 
 exports.getArticles = (req, res, next) => {
-  selectArticles()
+  const topicQuery = req.query;
+  selectArticles(topicQuery)
     .then((articles) => {
       res.status(200).send({ articles });
     })
@@ -82,7 +83,7 @@ exports.deleteCommentById = (req, res, next) => {
   const { comment_id } = req.params;
   removeCommentById(comment_id)
     .then(() => {
-      res.status(204).send();
+      res.sendStatus(204);
     })
     .catch(next);
 };

@@ -31,10 +31,15 @@ exports.selectArticleById = (article_id) => {
     });
 };
 
-exports.selectArticles = () => {
-  return db
-    .query(
-      `SELECT
+exports.selectArticles = (topicQuery) => {
+  const { topic } = topicQuery;
+  const queryGreenList = ['topic'];
+  const topicGreenList = ['cats', 'mitch', 'paper'];
+
+  if (Object.keys(topicQuery).length === 0) {
+    return db
+      .query(
+        `SELECT
         articles.article_id,
         articles.title,
         articles.topic,
@@ -47,10 +52,50 @@ exports.selectArticles = () => {
       LEFT JOIN comments ON articles.article_id = comments.article_id 
       GROUP BY articles.article_id 
       ORDER BY articles.created_at DESC;`
-    )
-    .then(({ rows }) => {
-      return rows;
+      )
+      .then(({ rows }) => {
+        return rows;
+      });
+  }
+
+  for (let key in topicQuery) {
+    if (!queryGreenList.includes(key))
+      return Promise.reject({
+        status: 400,
+        msg: 'Bad request - not a valid query',
+      });
+  }
+
+  if (!topicGreenList.includes(topic)) {
+    return Promise.reject({
+      status: 400,
+      msg: 'Bad request - not a valid topic',
     });
+  }
+
+  if (Object.keys(topicQuery).length !== 0) {
+    return db
+      .query(
+        `SELECT
+        articles.article_id,
+        articles.title,
+        articles.topic,
+        articles.author,
+        articles.created_at,
+        articles.votes,
+        articles.article_img_url,
+      COUNT(comments.comment_id)::INT AS comment_count 
+      FROM articles 
+      LEFT JOIN comments ON articles.article_id = comments.article_id
+      WHERE topic = $1
+      GROUP BY articles.article_id 
+      ORDER BY articles.created_at DESC;`,
+        [topic]
+      )
+      .then(({ rows }) => {
+        return rows;
+      });
+  }
 };
 
 exports.selectCommentsByArticleId = (article_id) => {
