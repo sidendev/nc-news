@@ -43,8 +43,8 @@ describe('GET/api', () => {
     return request(app)
       .get('/api')
       .expect(200)
-      .then((res) => {
-        expect(res.body.details).toEqual(JSON.parse(originalEndpointDetails));
+      .then(({ body }) => {
+        expect(body.details).toEqual(JSON.parse(originalEndpointDetails));
       });
   });
 });
@@ -54,47 +54,45 @@ describe('GET/api/articles/:article_id', () => {
     return request(app)
       .get('/api/articles/1')
       .expect(200)
-      .then((res) => {
-        expect(res.body.article.article_id).toBe(1);
-        expect(res.body.article.title).toBe(
-          'Living in the shadow of a great man'
-        );
-        expect(res.body.article.topic).toBe('mitch');
-        expect(res.body.article.author).toBe('butter_bridge');
-        expect(res.body.article.body).toBe('I find this existence challenging');
-        expect(res.body.article.votes).toBe(100);
+      .then(({ body }) => {
+        expect(body.article.article_id).toBe(1);
+        expect(body.article.title).toBe('Living in the shadow of a great man');
+        expect(body.article.topic).toBe('mitch');
+        expect(body.article.author).toBe('butter_bridge');
+        expect(body.article.body).toBe('I find this existence challenging');
+        expect(body.article.votes).toBe(100);
       });
   });
   test('GET:404 sends an appropriate status and error message when given a valid but non-existent id', () => {
     return request(app)
       .get('/api/articles/99999')
       .expect(404)
-      .then((res) => {
-        expect(res.body.msg).toBe('Article does not exist');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Article does not exist');
       });
   });
   test('GET:400 sends an appropriate status and error message when given an invalid id', () => {
     return request(app)
       .get('/api/articles/not-an-id')
       .expect(400)
-      .then((res) => {
-        expect(res.body.msg).toBe('Bad request');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request');
       });
   });
   test('GET:200 sends article to client with data by id given and adds comment_count for total comments for article', () => {
     return request(app)
       .get('/api/articles/9')
       .expect(200)
-      .then((res) => {
-        expect(res.body.article.comment_count).toBe(2);
+      .then(({ body }) => {
+        expect(body.article.comment_count).toBe(2);
       });
   });
   test('GET:200 sends article to client with data by id, returns 0 for comment_count if there are no comments for article', () => {
     return request(app)
       .get('/api/articles/2')
       .expect(200)
-      .then((res) => {
-        expect(res.body.article.comment_count).toBe(0);
+      .then(({ body }) => {
+        expect(body.article.comment_count).toBe(0);
       });
   });
 });
@@ -132,9 +130,9 @@ describe('GET/api/articles/:article_id/comments', () => {
     return request(app)
       .get('/api/articles/9/comments')
       .expect(200)
-      .then((response) => {
-        expect(response.body.comments.length).toBe(2);
-        response.body.comments.forEach((comment) => {
+      .then(({ body }) => {
+        expect(body.comments.length).toBe(2);
+        body.comments.forEach((comment) => {
           expect(typeof comment.comment_id).toBe('number');
           expect(typeof comment.body).toBe('string');
           expect(typeof comment.votes).toBe('number');
@@ -157,24 +155,24 @@ describe('GET/api/articles/:article_id/comments', () => {
     return request(app)
       .get('/api/articles/2/comments')
       .expect(200)
-      .then((response) => {
-        expect(response.body.comments).toEqual([]);
+      .then(({ body }) => {
+        expect(body.comments).toEqual([]);
       });
   });
   test('GET:404 sends an appropriate status and error message when given a valid but non-existent article id', () => {
     return request(app)
       .get('/api/articles/99999/comments')
       .expect(404)
-      .then((response) => {
-        expect(response.body.msg).toBe('No article found');
+      .then(({ body }) => {
+        expect(body.msg).toBe('No article found');
       });
   });
   test('GET:400 responds with an appropriate error message when given an invalid article id', () => {
     return request(app)
       .get('/api/articles/not-an-id/comments')
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe('Bad request');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request');
       });
   });
 });
@@ -189,13 +187,13 @@ describe('POST/api/articles/:article_id/comments', () => {
       .post('/api/articles/9/comments')
       .send(newComment)
       .expect(201)
-      .then((response) => {
-        expect(typeof response.body.comment.comment_id).toBe('number');
-        expect(response.body.comment.body).toBe('This is my first comment!');
-        expect(response.body.comment.article_id).toBe(9);
-        expect(response.body.comment.author).toBe('lurker');
-        expect(typeof response.body.comment.votes).toBe('number');
-        expect(typeof response.body.comment.created_at).toBe('string');
+      .then(({ body }) => {
+        expect(typeof body.comment.comment_id).toBe('number');
+        expect(body.comment.body).toBe('This is my first comment!');
+        expect(body.comment.article_id).toBe(9);
+        expect(body.comment.author).toBe('lurker');
+        expect(typeof body.comment.votes).toBe('number');
+        expect(typeof body.comment.created_at).toBe('string');
       });
   });
   test('POST:400 responds with an appropriate status and error message when provided with a bad request (invalid article id)', () => {
@@ -207,8 +205,8 @@ describe('POST/api/articles/:article_id/comments', () => {
       .post('/api/articles/not-an-id/comments')
       .send(newComment)
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe('Bad request');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request');
       });
   });
   test('POST:404 responds with status and error message when input a bad request (valid type article id but not present in db)', () => {
@@ -220,8 +218,8 @@ describe('POST/api/articles/:article_id/comments', () => {
       .post('/api/articles/99999/comments')
       .send(newComment)
       .expect(404)
-      .then((response) => {
-        expect(response.body.msg).toBe('Not found');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Not found');
       });
   });
   test('POST:400 responds with 400 status and error message when given a bad request (invalid datatype for comment)', () => {
@@ -233,10 +231,8 @@ describe('POST/api/articles/:article_id/comments', () => {
       .post('/api/articles/9/comments')
       .send(newComment)
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe(
-          'Bad request - invalid input for comment'
-        );
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - invalid input for comment');
       });
   });
   test('POST:400 responds with 400 status and error message when given a bad request (missing data for comment)', () => {
@@ -248,10 +244,8 @@ describe('POST/api/articles/:article_id/comments', () => {
       .post('/api/articles/9/comments')
       .send(newComment)
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe(
-          'Bad request - missing input for comment'
-        );
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - missing input for comment');
       });
   });
 });
@@ -305,10 +299,8 @@ describe('PATCH/api/articles/:article_id', () => {
       .patch('/api/articles/1')
       .send(newVote)
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe(
-          'Bad request, invalid input for updating votes'
-        );
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request, invalid input for updating votes');
       });
   });
   test('PATCH:400 responds with an appropriate status and error message when provided with a bad request (invalid article id)', () => {
@@ -319,8 +311,8 @@ describe('PATCH/api/articles/:article_id', () => {
       .patch('/api/articles/not-a-valid-id')
       .send(newVote)
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe('Bad request');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request');
       });
   });
 });
@@ -333,16 +325,16 @@ describe('DELETE/api/comments/:comment_id', () => {
     return request(app)
       .delete('/api/comments/99999')
       .expect(404)
-      .then((response) => {
-        expect(response.body.msg).toBe('Comment not found');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Comment not found');
       });
   });
   test('DELETE:400 responds with status and error message when given an invalid id', () => {
     return request(app)
       .delete('/api/comments/not-an-id')
       .expect(400)
-      .then((response) => {
-        expect(response.body.msg).toBe('Bad request');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request');
       });
   });
 });
@@ -395,24 +387,24 @@ describe('GET/api/articles?topic', () => {
     return request(app)
       .get('/api/articles?topic=not-a-topic')
       .expect(404)
-      .then((res) => {
-        expect(res.body.msg).toBe('Bad request - not a valid topic');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid topic');
       });
   });
   test('GET:404 sends a status and error message when given an invalid input topic query keyword', () => {
     return request(app)
       .get('/api/articles?not-a-valid-topic=cats')
       .expect(404)
-      .then((res) => {
-        expect(res.body.msg).toBe('Bad request - not a valid query');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid query');
       });
   });
   test('GET:400 sends a status and error message when given a blank input for topic', () => {
     return request(app)
       .get('/api/articles?topic=')
       .expect(400)
-      .then((res) => {
-        expect(res.body.msg).toBe('Bad request - not a valid topic input');
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid topic input');
       });
   });
 });
