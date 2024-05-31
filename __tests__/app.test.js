@@ -346,3 +346,57 @@ describe('GET/api/users', () => {
       });
   });
 });
+
+describe('GET/api/articles?topic', () => {
+  test('GET:200 and returns all articles filtered by the topic put in query', () => {
+    return request(app)
+      .get('/api/articles?topic=cats')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(1);
+        body.articles.forEach((article) => {
+          expect(typeof article.article_id).toBe('number');
+          expect(typeof article.title).toBe('string');
+          expect(typeof article.topic).toBe('string');
+          expect(typeof article.author).toBe('string');
+          expect(typeof article.created_at).toBe('string');
+          expect(typeof article.votes).toBe('number');
+          expect(typeof article.article_img_url).toBe('string');
+          expect(typeof article.comment_count).toBe('number');
+        });
+      });
+  });
+  test('GET:200 and returns an empty array if no articles exists for the topic that was input', () => {
+    return request(app)
+      .get('/api/articles?topic=paper')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(0);
+        expect(body.articles).toEqual([]);
+      });
+  });
+  test('GET:400 sends a status and error message when given an invalid topic', () => {
+    return request(app)
+      .get('/api/articles?topic=not-a-topic')
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe('Bad request - not a valid topic');
+      });
+  });
+  test('GET:400 sends a status and error message when given an invalid input topic query keyword', () => {
+    return request(app)
+      .get('/api/articles?not-a-valid-topic=cats')
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe('Bad request - not a valid query');
+      });
+  });
+  test('GET:400 sends a status and error message when given a blank input for topic', () => {
+    return request(app)
+      .get('/api/articles?topic=')
+      .expect(400)
+      .then((res) => {
+        expect(res.body.msg).toBe('Bad request - not a valid topic');
+      });
+  });
+});
