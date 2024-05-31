@@ -81,6 +81,22 @@ describe('GET/api/articles/:article_id', () => {
         expect(res.body.msg).toBe('Bad request');
       });
   });
+  test('GET:200 sends article to client with data by id given and adds comment_count for total comments for article', () => {
+    return request(app)
+      .get('/api/articles/9')
+      .expect(200)
+      .then((res) => {
+        expect(res.body.article.comment_count).toBe(2);
+      });
+  });
+  test('GET:200 sends article to client with data by id, returns 0 for comment_count if there are no comments for article', () => {
+    return request(app)
+      .get('/api/articles/2')
+      .expect(200)
+      .then((res) => {
+        expect(res.body.article.comment_count).toBe(0);
+      });
+  });
 });
 
 describe('GET/api/articles', () => {
@@ -357,7 +373,7 @@ describe('GET/api/articles?topic', () => {
         body.articles.forEach((article) => {
           expect(typeof article.article_id).toBe('number');
           expect(typeof article.title).toBe('string');
-          expect(typeof article.topic).toBe('string');
+          expect(article.topic).toBe('cats');
           expect(typeof article.author).toBe('string');
           expect(typeof article.created_at).toBe('string');
           expect(typeof article.votes).toBe('number');
@@ -375,18 +391,18 @@ describe('GET/api/articles?topic', () => {
         expect(body.articles).toEqual([]);
       });
   });
-  test('GET:400 sends a status and error message when given an invalid topic', () => {
+  test('GET:404 sends a status and error message when given an invalid topic', () => {
     return request(app)
       .get('/api/articles?topic=not-a-topic')
-      .expect(400)
+      .expect(404)
       .then((res) => {
         expect(res.body.msg).toBe('Bad request - not a valid topic');
       });
   });
-  test('GET:400 sends a status and error message when given an invalid input topic query keyword', () => {
+  test('GET:404 sends a status and error message when given an invalid input topic query keyword', () => {
     return request(app)
       .get('/api/articles?not-a-valid-topic=cats')
-      .expect(400)
+      .expect(404)
       .then((res) => {
         expect(res.body.msg).toBe('Bad request - not a valid query');
       });
@@ -396,7 +412,7 @@ describe('GET/api/articles?topic', () => {
       .get('/api/articles?topic=')
       .expect(400)
       .then((res) => {
-        expect(res.body.msg).toBe('Bad request - not a valid topic');
+        expect(res.body.msg).toBe('Bad request - not a valid topic input');
       });
   });
 });
