@@ -51,7 +51,14 @@ exports.selectArticleById = (article_id) => {
 exports.selectArticles = (topicQuery) => {
   const { topic } = topicQuery;
   const queryGreenList = ['topic'];
-  const topicGreenList = ['cats', 'mitch', 'paper'];
+  const topicGreenList = [
+    'cats',
+    'mitch',
+    'paper',
+    'coding',
+    'football',
+    'cooking',
+  ];
 
   if (Object.keys(topicQuery).length === 0) {
     return db
