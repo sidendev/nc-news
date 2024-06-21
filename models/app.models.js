@@ -68,6 +68,7 @@ exports.selectArticles = (topicQuery) => {
     'votes',
     'article_img_url',
     'created_at',
+    'comment_count',
   ];
 
   if (topicQuery.hasOwnProperty('topic') && !topic) {
