@@ -49,8 +49,8 @@ exports.selectArticleById = (article_id) => {
 };
 
 exports.selectArticles = (topicQuery) => {
-  const { topic } = topicQuery;
-  const queryGreenList = ['topic'];
+  let { topic, sort_by, order } = topicQuery;
+  const queryGreenList = ['topic', 'sort_by', 'order'];
   const topicGreenList = [
     'cats',
     'mitch',
@@ -59,6 +59,23 @@ exports.selectArticles = (topicQuery) => {
     'football',
     'cooking',
   ];
+  const orderGreenList = ['desc', 'asc', 'DESC', 'ASC'];
+  const sortByGreenList = [
+    'article_id',
+    'title',
+    'topic',
+    'author',
+    'votes',
+    'article_img_url',
+    'created_at',
+  ];
+
+  if (topicQuery.hasOwnProperty('topic') && !topic) {
+    return Promise.reject({
+      status: 400,
+      msg: 'Bad request - not a valid topic input',
+    });
+  }
 
   if (Object.keys(topicQuery).length === 0) {
     return db
@@ -81,53 +98,58 @@ exports.selectArticles = (topicQuery) => {
         return rows;
       });
   }
-
-  const topicIsEmpty = Object.values(topicQuery).includes('');
-  if (topicIsEmpty) {
-    return Promise.reject({
-      status: 400,
-      msg: 'Bad request - not a valid topic input',
-    });
-  }
-
-  for (let key in topicQuery) {
-    if (!queryGreenList.includes(key))
+  for (const query in topicQuery) {
+    if (!queryGreenList.includes(query))
       return Promise.reject({
         status: 404,
         msg: 'Bad request - not a valid query',
       });
   }
-
-  if (!topicGreenList.includes(topic)) {
+  if (topic && !topicGreenList.includes(topic)) {
     return Promise.reject({
       status: 404,
-      msg: 'Bad request - not a valid topic',
+      msg: 'Bad request - not a valid query',
     });
   }
+  if (sort_by && !sortByGreenList.includes(sort_by))
+    return Promise.reject({
+      status: 404,
+      msg: 'Bad request - not a valid query',
+    });
+  if (order && !orderGreenList.includes(order))
+    return Promise.reject({
+      status: 404,
+      msg: 'Bad request - not a valid query',
+    });
 
-  if (Object.keys(topicQuery).length !== 0) {
-    return db
-      .query(
-        `SELECT
-        articles.article_id,
-        articles.title,
-        articles.topic,
-        articles.author,
-        articles.created_at,
-        articles.votes,
-        articles.article_img_url,
-      COUNT(comments.comment_id)::INT AS comment_count 
-      FROM articles 
-      LEFT JOIN comments ON articles.article_id = comments.article_id
-      WHERE topic = $1
-      GROUP BY articles.article_id 
-      ORDER BY articles.created_at DESC;`,
-        [topic]
-      )
-      .then(({ rows }) => {
-        return rows;
-      });
+  if (!sort_by) {
+    sort_by = 'created_at';
   }
+  if (!order) {
+    order = 'DESC';
+  }
+
+  let query = `SELECT
+    articles.article_id,
+    articles.title,
+    articles.topic,
+    articles.author,
+    articles.created_at,
+    articles.votes,
+    articles.article_img_url,
+  COUNT(comments.comment_id)::INT AS comment_count 
+  FROM articles 
+  LEFT JOIN comments ON articles.article_id = comments.article_id`;
+  let params = [];
+  if (topic) {
+    query += ` WHERE topic = $1`;
+    params.push(topic);
+  }
+  query += ` GROUP BY articles.article_id 
+  ORDER BY ${sort_by} ${order};`;
+  return db.query(query, params).then(({ rows }) => {
+    return rows;
+  });
 };
 
 exports.selectCommentsByArticleId = (article_id) => {

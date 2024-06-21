@@ -388,7 +388,7 @@ describe('GET/api/articles?topic', () => {
       .get('/api/articles?topic=not-a-topic')
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toBe('Bad request - not a valid topic');
+        expect(body.msg).toBe('Bad request - not a valid query');
       });
   });
   test('GET:404 sends a status and error message when given an invalid input topic query keyword', () => {
@@ -405,6 +405,62 @@ describe('GET/api/articles?topic', () => {
       .expect(400)
       .then(({ body }) => {
         expect(body.msg).toBe('Bad request - not a valid topic input');
+      });
+  });
+});
+
+describe('GET/api/articles?sort_by', () => {
+  test('GET:200 return the articles with query sorted by the table column heading', () => {
+    return request(app)
+      .get('/api/articles?sort_by=title')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(13);
+        expect(body.articles).toBeSortedBy('title', { descending: true });
+      });
+  });
+  test('GET:404 invalid sort_by if sort_by value input does not exist', () => {
+    return request(app)
+      .get('/api/articles?sort_by=notvalid')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid query');
+      });
+  });
+  test('GET:404 invalid key input if query key does not exist', () => {
+    return request(app)
+      .get('/api/articles?notvalid=title')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid query');
+      });
+  });
+});
+
+describe('GET/api/articles?order', () => {
+  test('GET:200 returns articles ordered by the input asc', () => {
+    return request(app)
+      .get('/api/articles?order=asc')
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toHaveLength(13);
+        expect(body.articles).toBeSortedBy('created_at');
+      });
+  });
+  test('GET:404 error response if input order value does not exist', () => {
+    return request(app)
+      .get('/api/articles?order=notavalue')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid query');
+      });
+  });
+  test('GET:404 error response if input order key is not valid', () => {
+    return request(app)
+      .get('/api/articles?invalid=asc')
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe('Bad request - not a valid query');
       });
   });
 });
