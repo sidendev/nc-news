@@ -7,5 +7,5 @@ module.exports = [
   { description: 'You daily dose of positivity', slug: 'uplifting' },
   { description: 'Good news for the soul', slug: 'health' },
   { description: 'We love you Earth', slug: 'environment' },
-  { description: 'People are amazing', slug: 'heros' },
+  { description: 'People are amazing', slug: 'heroes' },
 ];
