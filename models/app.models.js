@@ -58,6 +58,12 @@ exports.selectArticles = (topicQuery) => {
     'coding',
     'football',
     'cooking',
+    'funny',
+    'animals',
+    'uplifting',
+    'health',
+    'environment',
+    'heroes',
   ];
   const orderGreenList = ['desc', 'asc', 'DESC', 'ASC'];
   const sortByGreenList = [
