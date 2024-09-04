@@ -1,6 +1,6 @@
 module.exports = [
   {
-    title: 'Sweet potato & butternut squash soup with lemon & garlic toast',
+    title: 'Sweet potato & butternut squash soup with garlic toast',
     topic: 'cooking',
     author: 'weegembump',
     body: 'Roast your vegetables in honey before blitzing into this velvety smooth, spiced soup - served with garlicky, zesty ciabatta slices for dipping',
@@ -10,7 +10,7 @@ module.exports = [
       'https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?w=700&h=700',
   },
   {
-    title: 'HOW COOKING HAS CHANGED US',
+    title: 'How Cooking Has Changed Us',
     topic: 'cooking',
     author: 'weegembump',
     body: 'In a cave in South Africa, archaeologists have unearthed the remains of a million-year-old campfire, and discovered tiny bits of animal bones and ash from plants. It’s the oldest evidence of our ancient human ancestors—probably Homo erectus, a species that preceded ours—cooking a meal.',
@@ -80,7 +80,7 @@ module.exports = [
       'https://images.pexels.com/photos/1267320/pexels-photo-1267320.jpeg?w=700&h=700',
   },
   {
-    title: 'The Notorious MSG’s Unlikely Formula For Success',
+    title: 'Notorious MSG’s Unlikely Formula For Success',
     topic: 'cooking',
     author: 'grumpy19',
     body: "The 'umami' craze has turned a much-maligned and misunderstood food additive into an object of obsession for the world’s most innovative chefs. But secret ingredient monosodium glutamate’s biggest secret may be that there was never anything wrong with it at all.",
@@ -260,7 +260,7 @@ module.exports = [
       'https://images.pexels.com/photos/2739664/pexels-photo-2739664.jpeg?w=700&h=700',
   },
   {
-    title: 'Heroes of the Pandemic: Stories of Bravery and Sacrifice',
+    title: 'Heroes of the Pandemic: Stories of Bravery & Sacrifice',
     topic: 'heroes',
     author: 'jessjelly',
     body: 'The COVID-19 pandemic has brought out countless heroes. Read about the brave individuals who have made significant sacrifices to help others during this crisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -270,7 +270,7 @@ module.exports = [
       'https://images.pexels.com/photos/4006979/pexels-photo-4006979.jpeg?w=700&h=700',
   },
   {
-    title: 'Everyday Heroes: Acts of Kindness in the Community',
+    title: 'Everyday Heroes: Kindness in the Community',
     topic: 'heroes',
     author: 'happyamy2016',
     body: 'Everyday heroes make a big difference with small acts of kindness. These stories highlight the impact of community members helping each other. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -320,7 +320,7 @@ module.exports = [
       'https://images.pexels.com/photos/927022/pexels-photo-927022.jpeg?w=700&h=700',
   },
   {
-    title: 'Adopt, Don’t Shop: The Joy of Rescuing Animals',
+    title: 'Adopt, Don’t Shop: Joy of Rescuing Animals',
     topic: 'animals',
     author: 'tickle122',
     body: 'Adopting animals from shelters can bring immense joy and fulfillment. This article shares the benefits and heartwarming stories of rescued pets. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -410,7 +410,7 @@ module.exports = [
       'https://images.pexels.com/photos/2011384/pexels-photo-2011384.jpeg?w=700&h=700',
   },
   {
-    title: 'The Impact of Plastic Pollution on Marine Life',
+    title: 'The Impact of Plastic on Marine Life',
     topic: 'environment',
     author: 'cooljmessy',
     body: 'Plastic pollution is a major threat to marine life. Learn about the impact of plastic waste on oceans and what we can do to reduce it. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -440,8 +440,7 @@ module.exports = [
       'https://images.pexels.com/photos/3771834/pexels-photo-3771834.jpeg?w=700&h=700',
   },
   {
-    title:
-      'Heroes Among Us: Stories of Ordinary People Doing Extraordinary Things',
+    title: 'Stories of Ordinary People Doing Extraordinary Things',
     topic: 'heroes',
     author: 'jessjelly',
     body: 'Everyday people can become extraordinary heroes through their actions. These inspiring stories showcase ordinary individuals making a significant impact. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -481,7 +480,7 @@ module.exports = [
       'https://images.pexels.com/photos/2228741/pexels-photo-2228741.jpeg?w=700&h=700',
   },
   {
-    title: 'The Cutest Baby Animal Photos to Brighten Your Day',
+    title: 'The Cutest Animal Pics to Brighten Your Day',
     topic: 'animals',
     author: 'cooljmessy',
     body: 'Baby animals are incredibly adorable. These photos of the cutest baby animals are sure to brighten your day and bring a smile to your face. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -571,7 +570,7 @@ module.exports = [
       'https://images.pexels.com/photos/1065084/pexels-photo-1065084.jpeg?w=700&h=700',
   },
   {
-    title: 'Random Acts of Kindness That Will Make You Smile',
+    title: 'Random Acts of Kindness That Make You Smile',
     topic: 'uplifting',
     author: 'cooljmessy',
     body: 'Sometimes, the simplest acts of kindness can have the biggest impact. These stories of random acts of kindness will warm your heart and remind you of the goodness in the world. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -631,7 +630,7 @@ module.exports = [
       'https://images.pexels.com/photos/386024/pexels-photo-386024.jpeg?w=700&h=700',
   },
   {
-    title: 'The Impact of Plastic Pollution on Wildlife',
+    title: 'Impact of Plastic Pollution on Wildlife',
     topic: 'environment',
     author: 'tickle122',
     body: 'Plastic pollution is a major threat to wildlife around the world. This article explores the devastating effects of plastic waste on animals and offers solutions for reducing plastic pollution. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis non nisl posuere ultrices.',
@@ -651,7 +650,7 @@ module.exports = [
       'https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?w=700&h=700',
   },
   {
-    title: 'Everyday Heroes: Ordinary People Doing Extraordinary Things',
+    title: 'Ordinary People Doing Extraordinary Things',
     topic: 'heroes',
     author: 'jessjelly',
     body: 'Everyday heroes are all around us, making a difference in their communities in big and small ways. This article celebrates the extraordinary acts of ordinary people who are making the world a better place. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
@@ -661,7 +660,7 @@ module.exports = [
       'https://images.pexels.com/photos/1374455/pexels-photo-1374455.jpeg?w=700&h=700',
   },
   {
-    title: 'First Responders: The Unsung Heroes of Our Communities',
+    title: 'First Responders: The Unsung Heroes',
     topic: 'heroes',
     author: 'happyamy2016',
     body: 'First responders put their lives on the line every day to keep us safe. This article highlights the bravery and dedication of these unsung heroes, from firefighters to paramedics. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Nulla tincidunt dolor et arcu vehicula, nec egestas erat dictum. Suspendisse potenti. Curabitur quis libero vel augue tincidunt pharetra nec ac felis. Sed in ultricies libero. Ut malesuada convallis arcu, nec accumsan nulla hendrerit nec. Vivamus ut sem eget arcu cursus efficitur. Integer tincidunt dui ac magna cursus, at scelerisque urna dictum. Fusce sollicitudin, libero ut suscipit auctor, metus lectus cursus neque, sed volutpat turpis elit eu turpis. Morbi malesuada massa ut nisi consectetur, a lacinia nisl vestibulum.',
